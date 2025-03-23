@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+/* table */
+.table-container {
+  overflow-x: auto;
+}
+
+.book-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  text-align: left;
+  color: white;
+  background-color: palevioletred;
+}
+
+/* tr > td:nth-child(8) {
+  display: flex;
+  gap: 5px;
+  height: 100%;
+} */
+
+.edit-btn,
+.delete-btn {
+  border: none;
+  border-radius: 6px;
+  background-color: palevioletred;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+
+  &:hover {
+    background-color: pink;
+  }
+}
+
+/* popover */
+.new-book-form,
+.edit-book-form {
+  background-color: lightblue;
+  display: inline-block;
+  padding: 20px;
+}

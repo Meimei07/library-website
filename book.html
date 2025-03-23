@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book</title>
+    <link rel="stylesheet" href="book.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <!-- <div>
+      <div>
+        <h1>LIBRARY</h1>
+        <span class="material-symbols-outlined"> menu </span>
+      </div>
+
+      <ul>
+        <li>Books</li>
+        <li>Visitors</li>
+        <li>Cards</li>
+        <li>Statistics</li>
+      </ul>
+    </div> -->
+
+    <!-- table -->
+    <div class="table-container">
+      <table class="book-table"></table>
+    </div>
+
+    <!-- new book popover -->
+    <button popovertarget="new-book-popover">New Book</button>
+
+    <div
+      style="justify-self: center; align-self: center"
+      popover
+      id="new-book-popover"
+    >
+      <form class="new-book-form">
+        <div>
+          <label>Book</label>
+          <input type="text" name="name" />
+        </div>
+
+        <div>
+          <label>Author</label>
+          <input type="text" name="author" />
+        </div>
+
+        <div>
+          <label>Publisher</label>
+          <input type="text" name="publisher" />
+        </div>
+
+        <div>
+          <label>Publish year</label>
+          <input type="text" name="publishYear" />
+        </div>
+
+        <div>
+          <label>Pages</label>
+          <input type="text" name="pages" />
+        </div>
+
+        <div>
+          <label>Copies</label>
+          <input type="text" name="copies" />
+        </div>
+
+        <button class="add-book-btn">Add</button>
+      </form>
+    </div>
+
+    <!-- edit book popover -->
+    <div
+      style="justify-self: center; align-self: center"
+      popover
+      id="edit-book-popover"
+    >
+      <form class="edit-book-form">
+        <div class="js-name-container">
+          <label>Book</label>
+          <input type="text" name="name" />
+        </div>
+
+        <div class="js-author-container">
+          <label>Author</label>
+          <input type="text" name="author" />
+        </div>
+
+        <div class="js-publisher-container">
+          <label>Publisher</label>
+          <input type="text" name="publisher" />
+        </div>
+
+        <div class="js-publish-year-container">
+          <label>Publish year</label>
+          <input type="text" name="publishYear" />
+        </div>
+
+        <div class="js-pages-container">
+          <label>Pages</label>
+          <input type="text" name="pages" />
+        </div>
+
+        <div class="js-copies-container">
+          <label>Copies</label>
+          <input type="text" name="copies" />
+        </div>
+
+        <button class="save-book-btn">Save</button>
+      </form>
+    </div>
+
+    <script src="book.js"></script>
+  </body>
+</html>
