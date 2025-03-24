@@ -76,13 +76,17 @@ renderBook(books);
 
 // add new book
 const bookFormEl = document.querySelector(".js-new-book-form");
-const addBookBtn = document.querySelector(".js-add-book-btn");
 
-addBookBtn.addEventListener("click", (event) => {
+bookFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
 
   const formData = new FormData(bookFormEl);
   const book = Object.fromEntries(formData.entries());
+
+  if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
+    alert("please enter number greater than 0 only.");
+    return;
+  }
 
   book.publishYear = parseInt(book.publishYear);
   book.pages = parseInt(book.pages);
@@ -122,7 +126,6 @@ const publishYearEl = document.querySelector(
 const pagesEl = document.querySelector(".js-pages-container input");
 const copiesEl = document.querySelector(".js-copies-container input");
 
-const saveBtn = document.querySelector(".js-save-book-btn");
 const editBookForm = document.querySelector(".js-edit-book-form");
 
 let bookId;
@@ -141,11 +144,16 @@ function editBook(id) {
 }
 
 // save edit
-saveBtn.addEventListener("click", (e) => {
+editBookForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const formData = new FormData(editBookForm);
   const book = Object.fromEntries(formData.entries());
+
+  if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
+    alert("please enter number greater than 0 only.");
+    return;
+  }
 
   book.publishYear = parseInt(book.publishYear);
   book.pages = parseInt(book.pages);
