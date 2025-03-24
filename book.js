@@ -1,28 +1,41 @@
 const bookTable = document.querySelector(".js-book-table");
 
-// data
-const books = [
-  {
-    id: 1,
-    name: "Macbeth",
-    author: "William Shakespare",
-    publisher: "William Shakespare",
-    publishYear: 1623,
-    pages: 249,
-    copies: 5,
-  },
-  {
-    id: 2,
-    name: "Dracula",
-    author: "Bram Stoker",
-    publisher: "Bram Stoker",
-    publishYear: 1897,
-    pages: 488,
-    copies: 5,
-  },
-];
+// get data
+let books = getFromLocalStorage();
+if (books === null || books.length === 0) {
+  books = [];
+}
+
+// const books = [
+//   {
+//     id: 1,
+//     name: "Macbeth",
+//     author: "William Shakespare",
+//     publisher: "William Shakespare",
+//     publishYear: 1623,
+//     pages: 249,
+//     copies: 5,
+//   },
+//   {
+//     id: 2,
+//     name: "Dracula",
+//     author: "Bram Stoker",
+//     publisher: "Bram Stoker",
+//     publishYear: 1897,
+//     pages: 488,
+//     copies: 5,
+//   },
+// ];
 
 console.log(books);
+
+function saveToLocalStorage() {
+  localStorage.setItem("books", JSON.stringify(books));
+}
+
+function getFromLocalStorage() {
+  return JSON.parse(localStorage.getItem("books"));
+}
 
 // render
 function renderBook(books) {
@@ -61,16 +74,6 @@ function renderBook(books) {
 
 renderBook(books);
 
-// delete
-function deleteBook(id) {
-  let matchingIndex = books.findIndex((book) => book.id === id);
-  console.log(id);
-  books.splice(matchingIndex, 1);
-  console.log(books);
-
-  renderBook(books);
-}
-
 // add new book
 const bookFormEl = document.querySelector(".js-new-book-form");
 const addBookBtn = document.querySelector(".js-add-book-btn");
@@ -88,6 +91,8 @@ addBookBtn.addEventListener("click", (event) => {
   book.id = Math.floor(Math.random() * 10001);
 
   books.push(book);
+  saveToLocalStorage();
+
   renderBook(books);
 
   bookFormEl.reset();
@@ -95,6 +100,17 @@ addBookBtn.addEventListener("click", (event) => {
 });
 
 console.log(books);
+
+// delete
+function deleteBook(id) {
+  let matchingIndex = books.findIndex((book) => book.id === id);
+  console.log(id);
+  books.splice(matchingIndex, 1);
+  console.log(books);
+
+  saveToLocalStorage();
+  renderBook(books);
+}
 
 // edit book
 const nameEl = document.querySelector(".js-name-container input");
@@ -140,6 +156,7 @@ saveBtn.addEventListener("click", (e) => {
   let matchingIndex = books.findIndex((book) => book.id === bookId);
 
   books[matchingIndex] = book;
+  saveToLocalStorage();
   renderBook(books);
 
   document.querySelector("#edit-book-popover").hidePopover();
@@ -148,9 +165,8 @@ saveBtn.addEventListener("click", (e) => {
 // search
 const searchEl = document.querySelector(".js-search-bar");
 let matchingBooks;
-let keyword;
 
-function search() {
+function search(keyword) {
   matchingBooks = books.filter((book) => {
     return (
       book.name.toLowerCase().includes(keyword.toLowerCase()) ||
@@ -161,10 +177,10 @@ function search() {
 }
 
 searchEl.addEventListener("keyup", () => {
-  keyword = searchEl.value;
+  let keyword = searchEl.value;
   console.log(keyword);
 
-  search();
+  search(keyword);
   renderBook(matchingBooks);
 });
 
@@ -191,17 +207,18 @@ function sortBooks(books) {
 }
 
 sortBtn.addEventListener("click", () => {
+  let keyword = searchEl.value;
   sortType = typeEl.options[typeEl.selectedIndex].value;
 
-  if (keyword == "") {
+  if (keyword === "") {
     // sort books
 
     sortBooks(books);
     renderBook(books);
-  } else {
+  } else if (keyword !== "") {
     // sort search results
 
-    search();
+    search(keyword);
     sortBooks(matchingBooks);
     renderBook(matchingBooks);
   }
