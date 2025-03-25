@@ -12,16 +12,18 @@ const editBookForm = document.querySelector(".js-edit-book-form");
 const searchEl = document.querySelector(".js-search-bar");
 const sortBtn = document.querySelector(".js-sort-book-btn");
 const typeEl = document.querySelector(".js-sort-type");
+const newBookOverlay = document.querySelector(".js-new-book-overlay");
+const editBookOverlay = document.querySelector(".js-edit-book-overlay");
 
 let bookId;
 let matchingBooks;
 let sortType;
 
 // get data
-let books = getFromLocalStorage();
-if (books === null || books.length === 0) {
-  books = [];
-}
+let books = getFromLocalStorage() || [];
+// if (books === null || books.length === 0) {
+//   books = [];
+// }
 
 // const books = [
 //   {
@@ -70,7 +72,7 @@ function renderBook(books) {
         <td>${book.pages}</td>
         <td>${book.copies}</td>
         <td>
-          <button popovertarget="edit-book-popover" onclick="editBook(${book.id})" class="edit-book-btn js-edit-book-btn">edit</button>
+          <button onclick="editBook(${book.id}); openEditBookPopover();" class="edit-book-btn">edit</button>
           <button onclick="deleteBook(${book.id})" class="delete-book-btn js-delete-book-btn">delete</button>
         </td>
       </tr>
@@ -142,6 +144,26 @@ function sortBooks(books) {
   }
 }
 
+// open new book popover
+function openNewBookPopover() {
+  newBookOverlay.style.display = "flex";
+}
+
+// close new book popover
+function closeNewBookPopover() {
+  newBookOverlay.style.display = "none";
+}
+
+// open edit book popover
+function openEditBookPopover() {
+  editBookOverlay.style.display = "flex";
+}
+
+// close edit book popover
+function closeEditBookPopover() {
+  editBookOverlay.style.display = "none";
+}
+
 renderBook(books);
 
 // add new book
@@ -164,14 +186,11 @@ bookFormEl.addEventListener("submit", (event) => {
 
   books.push(book);
   saveToLocalStorage();
-
   renderBook(books);
 
   bookFormEl.reset();
-  document.querySelector("#new-book-popover").hidePopover();
+  closeNewBookPopover();
 });
-
-// console.log(books);
 
 // save edit
 editBookForm.addEventListener("submit", (e) => {
@@ -197,9 +216,10 @@ editBookForm.addEventListener("submit", (e) => {
   saveToLocalStorage();
   renderBook(books);
 
-  document.querySelector("#edit-book-popover").hidePopover();
+  closeEditBookPopover();
 });
 
+// show search results
 searchEl.addEventListener("keyup", () => {
   let keyword = searchEl.value;
   console.log(keyword);
@@ -208,6 +228,7 @@ searchEl.addEventListener("keyup", () => {
   renderBook(matchingBooks);
 });
 
+// show sort results
 sortBtn.addEventListener("click", () => {
   let keyword = searchEl.value;
   sortType = typeEl.options[typeEl.selectedIndex].value;

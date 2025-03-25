@@ -8,36 +8,54 @@
 
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=menu"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
     />
   </head>
   <body>
     <!-- header -->
-    <!-- <div>
+    <div class="header">
       <div>
         <h1>LIBRARY</h1>
-        <span class="material-symbols-outlined"> menu </span>
+
+        <button popovertarget="sidebar">
+          <span class="menu material-symbols-outlined"> menu </span>
+        </button>
       </div>
 
-      <ul>
-        <li>Books</li>
-        <li>Visitors</li>
-        <li>Cards</li>
-        <li>Statistics</li>
+      <ul popover id="sidebar">
+        <li>
+          <span class="material-symbols-outlined"> dictionary </span
+          ><span
+            onclick="sidebar.hidePopover()"
+            class="close material-symbols-outlined"
+          >
+            close
+          </span>
+        </li>
+        <li><a href="">Books</a></li>
+        <li><a href="">Visitors</a></li>
+        <li><a href="">Cards</a></li>
+        <li><a href="">Statisics</a></li>
       </ul>
-    </div> -->
+    </div>
+
+    <h4 class="book-section">All Books:</h4>
 
     <!-- new book popover -->
-    <button class="new-book-btn" popovertarget="new-book-popover">
-      New Book
+    <button onclick="openNewBookPopover()" class="new-book-btn">
+      <span class="material-symbols-outlined"> add </span>
     </button>
 
-    <div
-      style="justify-self: center; align-self: center"
-      popover
-      id="new-book-popover"
-    >
-      <form class="new-book-form js-new-book-form">
+    <div class="overlay js-new-book-overlay">
+      <form class="book-form js-new-book-form">
+        <span>New Book</span>
+        <span
+          onclick="closeNewBookPopover()"
+          class="close material-symbols-outlined"
+        >
+          close
+        </span>
+
         <div>
           <label>Book</label>
           <input type="text" name="name" required />
@@ -49,47 +67,52 @@
         </div>
 
         <div>
-          <label>Publisher</label>
-          <input type="text" name="publisher" required />
+          <div>
+            <label>Publisher</label>
+            <input type="text" name="publisher" required />
+          </div>
+
+          <div>
+            <label>Publish year</label>
+            <input type="number" name="publishYear" required />
+          </div>
         </div>
 
         <div>
-          <label>Publish year</label>
-          <input type="number" name="publishYear" required />
-        </div>
+          <div>
+            <label>Pages</label>
+            <input type="number" name="pages" required />
+          </div>
 
-        <div>
-          <label>Pages</label>
-          <input type="number" name="pages" required />
-        </div>
-
-        <div>
-          <label>Copies</label>
-          <input type="number" name="copies" required />
+          <div>
+            <label>Copies</label>
+            <input type="number" name="copies" required />
+          </div>
         </div>
 
         <button type="submit" class="add-book-btn js-add-book-btn">Add</button>
       </form>
     </div>
 
-    <!-- sort -->
-    <div class="sort-container">
-      <span>Sort by:</span>
-      <select class="js-sort-type">
-        <option value="name">Book's name</option>
-        <option value="author">Author's name</option>
-        <option value="copies">Number of Copies</option>
-      </select>
-      <button class="sort-book-btn js-sort-book-btn">Sort</button>
-    </div>
+    <div class="sort-search-container">
+      <!-- sort -->
+      <div class="sort-container">
+        <select class="js-sort-type">
+          <option value="name">Book's name</option>
+          <option value="author">Author's name</option>
+          <option value="copies">Number of Copies</option>
+        </select>
+        <button class="sort-book-btn js-sort-book-btn">Sort</button>
+      </div>
 
-    <!-- search -->
-    <div class="search-container">
-      <input
-        class="search-bar js-search-bar"
-        type="search"
-        placeholder="Search"
-      />
+      <!-- search -->
+      <div class="search-container">
+        <input
+          class="search-bar js-search-bar"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
     </div>
 
     <!-- table -->
@@ -98,12 +121,16 @@
     </div>
 
     <!-- edit book popover -->
-    <div
-      style="justify-self: center; align-self: center"
-      popover
-      id="edit-book-popover"
-    >
-      <form class="edit-book-form js-edit-book-form">
+    <div class="overlay js-edit-book-overlay">
+      <form class="book-form js-edit-book-form">
+        <span>Edit Book</span>
+        <span
+          onclick="closeEditBookPopover()"
+          class="close material-symbols-outlined"
+        >
+          close
+        </span>
+
         <div class="js-name-container">
           <label>Book</label>
           <input type="text" name="name" required />
