@@ -1,4 +1,21 @@
 const bookTable = document.querySelector(".js-book-table");
+const bookFormEl = document.querySelector(".js-new-book-form");
+const nameEl = document.querySelector(".js-name-container input");
+const authorEl = document.querySelector(".js-author-container input");
+const publisherEl = document.querySelector(".js-publisher-container input");
+const publishYearEl = document.querySelector(
+  ".js-publish-year-container input"
+);
+const pagesEl = document.querySelector(".js-pages-container input");
+const copiesEl = document.querySelector(".js-copies-container input");
+const editBookForm = document.querySelector(".js-edit-book-form");
+const searchEl = document.querySelector(".js-search-bar");
+const sortBtn = document.querySelector(".js-sort-book-btn");
+const typeEl = document.querySelector(".js-sort-type");
+
+let bookId;
+let matchingBooks;
+let sortType;
 
 // get data
 let books = getFromLocalStorage();
@@ -27,7 +44,7 @@ if (books === null || books.length === 0) {
 //   },
 // ];
 
-console.log(books);
+// console.log(books);
 
 function saveToLocalStorage() {
   localStorage.setItem("books", JSON.stringify(books));
@@ -72,11 +89,62 @@ function renderBook(books) {
       </tr>${html}`;
 }
 
+// delete
+function deleteBook(id) {
+  let matchingIndex = books.findIndex((book) => book.id === id);
+  console.log(id);
+  books.splice(matchingIndex, 1);
+  console.log(books);
+
+  saveToLocalStorage();
+  renderBook(books);
+}
+
+// edit book
+function editBook(id) {
+  bookId = id;
+
+  let matchingBook = books.find((book) => book.id === id);
+
+  nameEl.value = matchingBook.name;
+  authorEl.value = matchingBook.author;
+  publisherEl.value = matchingBook.publisher;
+  publishYearEl.value = matchingBook.publishYear;
+  pagesEl.value = matchingBook.pages;
+  copiesEl.value = matchingBook.copies;
+}
+
+// search
+function search(keyword) {
+  matchingBooks = books.filter((book) => {
+    return (
+      book.name.toLowerCase().includes(keyword.toLowerCase()) ||
+      book.author.toLowerCase().includes(keyword.toLowerCase()) ||
+      book.publisher.toLowerCase().includes(keyword.toLowerCase())
+    );
+  });
+}
+
+// sort
+function sortBooks(books) {
+  switch (sortType) {
+    case "name":
+      books.sort((a, b) => a.name.localeCompare(b.name));
+      break;
+    case "author":
+      books.sort((a, b) => a.author.localeCompare(b.author));
+      break;
+    case "copies":
+      books.sort((a, b) => b.copies - a.copies);
+      break;
+    default:
+      break;
+  }
+}
+
 renderBook(books);
 
 // add new book
-const bookFormEl = document.querySelector(".js-new-book-form");
-
 bookFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -103,45 +171,7 @@ bookFormEl.addEventListener("submit", (event) => {
   document.querySelector("#new-book-popover").hidePopover();
 });
 
-console.log(books);
-
-// delete
-function deleteBook(id) {
-  let matchingIndex = books.findIndex((book) => book.id === id);
-  console.log(id);
-  books.splice(matchingIndex, 1);
-  console.log(books);
-
-  saveToLocalStorage();
-  renderBook(books);
-}
-
-// edit book
-const nameEl = document.querySelector(".js-name-container input");
-const authorEl = document.querySelector(".js-author-container input");
-const publisherEl = document.querySelector(".js-publisher-container input");
-const publishYearEl = document.querySelector(
-  ".js-publish-year-container input"
-);
-const pagesEl = document.querySelector(".js-pages-container input");
-const copiesEl = document.querySelector(".js-copies-container input");
-
-const editBookForm = document.querySelector(".js-edit-book-form");
-
-let bookId;
-
-function editBook(id) {
-  bookId = id;
-
-  let matchingBook = books.find((book) => book.id === id);
-
-  nameEl.value = matchingBook.name;
-  authorEl.value = matchingBook.author;
-  publisherEl.value = matchingBook.publisher;
-  publishYearEl.value = matchingBook.publishYear;
-  pagesEl.value = matchingBook.pages;
-  copiesEl.value = matchingBook.copies;
-}
+// console.log(books);
 
 // save edit
 editBookForm.addEventListener("submit", (e) => {
@@ -170,20 +200,6 @@ editBookForm.addEventListener("submit", (e) => {
   document.querySelector("#edit-book-popover").hidePopover();
 });
 
-// search
-const searchEl = document.querySelector(".js-search-bar");
-let matchingBooks;
-
-function search(keyword) {
-  matchingBooks = books.filter((book) => {
-    return (
-      book.name.toLowerCase().includes(keyword.toLowerCase()) ||
-      book.author.toLowerCase().includes(keyword.toLowerCase()) ||
-      book.publisher.toLowerCase().includes(keyword.toLowerCase())
-    );
-  });
-}
-
 searchEl.addEventListener("keyup", () => {
   let keyword = searchEl.value;
   console.log(keyword);
@@ -191,28 +207,6 @@ searchEl.addEventListener("keyup", () => {
   search(keyword);
   renderBook(matchingBooks);
 });
-
-// sort
-const sortBtn = document.querySelector(".js-sort-book-btn");
-const typeEl = document.querySelector(".js-sort-type");
-
-let sortType;
-
-function sortBooks(books) {
-  switch (sortType) {
-    case "name":
-      books.sort((a, b) => a.name.localeCompare(b.name));
-      break;
-    case "author":
-      books.sort((a, b) => a.author.localeCompare(b.author));
-      break;
-    case "copies":
-      books.sort((a, b) => b.copies - a.copies);
-      break;
-    default:
-      break;
-  }
-}
 
 sortBtn.addEventListener("click", () => {
   let keyword = searchEl.value;
