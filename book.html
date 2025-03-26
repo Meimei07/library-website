@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book</title>
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/popover.css" />
+    <link rel="stylesheet" href="./styles/table.css" />
     <link rel="stylesheet" href="./styles/book.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
 
     <link
       rel="stylesheet"
@@ -32,8 +36,8 @@
             close
           </span>
         </li>
-        <li><a href="">Books</a></li>
-        <li><a href="">Visitors</a></li>
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
         <li><a href="">Cards</a></li>
         <li><a href="">Statisics</a></li>
       </ul>
@@ -48,13 +52,14 @@
 
     <h4 class="page-section">All Books:</h4>
 
-    <!-- new book popover -->
-    <button onclick="openNewBookPopover()" class="new-book-btn">
+    <!-- new book btn -->
+    <button onclick="openNewBookPopover()" class="new-btn">
       <span class="material-symbols-outlined"> add </span>
     </button>
 
-    <div class="overlay js-new-book-overlay">
-      <form class="book-form js-new-book-form">
+    <!-- new book popover -->
+    <div class="overlay js-new-overlay">
+      <form class="form js-new-form">
         <span>New Book</span>
         <span
           onclick="closeNewBookPopover()"
@@ -97,7 +102,7 @@
           </div>
         </div>
 
-        <button type="submit" class="add-book-btn js-add-book-btn">Add</button>
+        <button type="submit" class="add-btn">Add</button>
       </form>
     </div>
 
@@ -109,7 +114,7 @@
           <option value="author">Author's name</option>
           <option value="copies">Number of Copies</option>
         </select>
-        <button class="sort-book-btn js-sort-book-btn">Sort</button>
+        <button class="sort-btn js-sort-btn">Sort</button>
       </div>
 
       <!-- search -->
@@ -124,12 +129,12 @@
 
     <!-- table -->
     <div class="table-container">
-      <table class="book-table js-book-table"></table>
+      <table class="table js-table"></table>
     </div>
 
     <!-- edit book popover -->
-    <div class="overlay js-edit-book-overlay">
-      <form class="book-form js-edit-book-form">
+    <div class="overlay js-edit-overlay">
+      <form class="form js-edit-form">
         <span>Edit Book</span>
         <span
           onclick="closeEditBookPopover()"
@@ -148,32 +153,35 @@
           <input type="text" name="author" required />
         </div>
 
-        <div class="js-publisher-container">
-          <label>Publisher</label>
-          <input type="text" name="publisher" required />
+        <div>
+          <div class="js-publisher-container">
+            <label>Publisher</label>
+            <input type="text" name="publisher" required />
+          </div>
+
+          <div class="js-publish-year-container">
+            <label>Publish year</label>
+            <input type="number" name="publishYear" required />
+          </div>
         </div>
 
-        <div class="js-publish-year-container">
-          <label>Publish year</label>
-          <input type="number" name="publishYear" required />
+        <div>
+          <div class="js-pages-container">
+            <label>Pages</label>
+            <input type="number" name="pages" required />
+          </div>
+
+          <div class="js-copies-container">
+            <label>Copies</label>
+            <input type="number" name="copies" required />
+          </div>
         </div>
 
-        <div class="js-pages-container">
-          <label>Pages</label>
-          <input type="number" name="pages" required />
-        </div>
-
-        <div class="js-copies-container">
-          <label>Copies</label>
-          <input type="number" name="copies" required />
-        </div>
-
-        <button type="submit" class="save-book-btn js-save-book-btn">
-          Save
-        </button>
+        <button type="submit" class="save-btn">Save</button>
       </form>
     </div>
 
+    <script src="./scripts/storage.js"></script>
     <script src="./scripts/book.js"></script>
   </body>
 </html>

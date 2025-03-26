@@ -1,5 +1,5 @@
-const bookTable = document.querySelector(".js-book-table");
-const bookFormEl = document.querySelector(".js-new-book-form");
+const tableEl = document.querySelector(".js-table");
+const newFormEl = document.querySelector(".js-new-form");
 const nameEl = document.querySelector(".js-name-container input");
 const authorEl = document.querySelector(".js-author-container input");
 const publisherEl = document.querySelector(".js-publisher-container input");
@@ -8,12 +8,12 @@ const publishYearEl = document.querySelector(
 );
 const pagesEl = document.querySelector(".js-pages-container input");
 const copiesEl = document.querySelector(".js-copies-container input");
-const editBookForm = document.querySelector(".js-edit-book-form");
+const editFormEl = document.querySelector(".js-edit-form");
 const searchEl = document.querySelector(".js-search-bar");
-const sortBtn = document.querySelector(".js-sort-book-btn");
+const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
-const newBookOverlay = document.querySelector(".js-new-book-overlay");
-const editBookOverlay = document.querySelector(".js-edit-book-overlay");
+const newBookOverlay = document.querySelector(".js-new-overlay");
+const editBookOverlay = document.querySelector(".js-edit-overlay");
 const activePage = window.location.pathname;
 const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
@@ -22,46 +22,12 @@ let matchingBooks;
 let sortType;
 
 // get data
-let books = getFromLocalStorage() || [];
-// if (books === null || books.length === 0) {
-//   books = [];
-// }
-
-// const books = [
-//   {
-//     id: 1,
-//     name: "Macbeth",
-//     author: "William Shakespare",
-//     publisher: "William Shakespare",
-//     publishYear: 1623,
-//     pages: 249,
-//     copies: 5,
-//   },
-//   {
-//     id: 2,
-//     name: "Dracula",
-//     author: "Bram Stoker",
-//     publisher: "Bram Stoker",
-//     publishYear: 1897,
-//     pages: 488,
-//     copies: 5,
-//   },
-// ];
-
-// console.log(books);
-
-function saveToLocalStorage() {
-  localStorage.setItem("books", JSON.stringify(books));
-}
-
-function getFromLocalStorage() {
-  return JSON.parse(localStorage.getItem("books"));
-}
+let books = getFromLocalStorage("books") || [];
 
 // render
 function renderBook(books) {
   let html = "";
-  bookTable.innerHTML = "";
+  tableEl.innerHTML = "";
 
   books.forEach((book) => {
     html += `
@@ -85,7 +51,7 @@ delete_forever
     `;
   });
 
-  bookTable.innerHTML = `<tr>
+  tableEl.innerHTML = `<tr>
         <th style="width: 5%">ID</th>
         <th style="width: 15%">Book</th>
         <th style="width: 15%">Author</th>
@@ -100,11 +66,9 @@ delete_forever
 // delete
 function deleteBook(id) {
   let matchingIndex = books.findIndex((book) => book.id === id);
-  console.log(id);
   books.splice(matchingIndex, 1);
-  console.log(books);
 
-  saveToLocalStorage();
+  saveToLocalStorage("books", books);
   renderBook(books);
 }
 
@@ -173,10 +137,10 @@ function closeEditBookPopover() {
 renderBook(books);
 
 // add new book
-bookFormEl.addEventListener("submit", (event) => {
+newFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const formData = new FormData(bookFormEl);
+  const formData = new FormData(newFormEl);
   const book = Object.fromEntries(formData.entries());
 
   if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
@@ -191,18 +155,18 @@ bookFormEl.addEventListener("submit", (event) => {
   book.id = Math.floor(Math.random() * 10001);
 
   books.push(book);
-  saveToLocalStorage();
+  saveToLocalStorage("books", books);
   renderBook(books);
 
-  bookFormEl.reset();
+  newFormEl.reset();
   closeNewBookPopover();
 });
 
 // save edit
-editBookForm.addEventListener("submit", (e) => {
+editFormEl.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const formData = new FormData(editBookForm);
+  const formData = new FormData(editFormEl);
   const book = Object.fromEntries(formData.entries());
 
   if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
@@ -219,7 +183,7 @@ editBookForm.addEventListener("submit", (e) => {
   let matchingIndex = books.findIndex((book) => book.id === bookId);
 
   books[matchingIndex] = book;
-  saveToLocalStorage();
+  saveToLocalStorage("books", books);
   renderBook(books);
 
   closeEditBookPopover();
