@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+input {
+  padding: 4px;
+}
+
+.page-section {
+  color: #2a2f4a;
+  padding: 0 12px;
+  padding-top: 5px;
+}
+
+/* new btn */
+.new-btn {
+  background-color: #c7d9dd;
+  border: 2px double #2a2f4a;
+  border-radius: 10px;
+  padding: 3px 7px;
+  cursor: pointer;
+  transition: all 0.4s;
+
+  position: fixed;
+  bottom: 20px;
+  right: 15px;
+
+  & > span {
+    color: #2a2f4a;
+    font-size: 30px;
+  }
+
+  &:hover {
+    background-color: #d9ebf0;
+    transform: scale(1.2);
+  }
+}
+
+.sort-search-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 10px;
+}
+
+/* sort */
+.sort-container {
+  display: flex;
+  gap: 10px;
+
+  & select {
+    flex: 1;
+    max-width: 200px;
+  }
+}
+
+/* search */
+.search-container {
+  max-width: 245px;
+
+  & input {
+    padding: 3px 5px;
+    width: 100%;
+  }
+}
+
+.sort-btn,
+.save-btn,
+.add-btn {
+  border: none;
+  border-radius: 6px;
+  background-color: #adb2d4;
+  padding: 5px 7px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #979cc4;
+  }
+}
+
+.edit-delete-btn {
+  text-align: center;
+}
+
+.edit-delete-btn > button {
+  margin-bottom: 1px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: gray;
+
+  &:hover {
+    color: red;
+  }
+}
+
+.active {
+  font-weight: bold;
+}
+
+@media (min-width: 450px) {
+  .page-section {
+    font-size: 17px;
+  }
+
+  .sort-search-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sort-container {
+    width: 300px;
+    flex: 1;
+
+    & > select {
+      padding: 8px 5px;
+    }
+
+    & > button {
+      width: 50px;
+    }
+  }
+
+  .search-container {
+    flex: 1;
+    width: 270px;
+
+    & > input {
+      padding: 8px 5px;
+    }
+  }
+}

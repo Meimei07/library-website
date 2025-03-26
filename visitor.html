@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visitor</title>
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/popover.css" />
+    <link rel="stylesheet" href="./styles/table.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <div>
+        <h1>LIBRARY</h1>
+
+        <button popovertarget="sidebar">
+          <span class="menu material-symbols-outlined"> menu </span>
+        </button>
+      </div>
+
+      <ul class="mobile-navbar" popover id="sidebar">
+        <li>
+          <span class="material-symbols-outlined"> dictionary </span
+          ><span
+            onclick="sidebar.hidePopover()"
+            class="close material-symbols-outlined"
+          >
+            close
+          </span>
+        </li>
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
+        <li><a href="">Cards</a></li>
+        <li><a href="">Statisics</a></li>
+      </ul>
+
+      <ul class="big-screen-navbar">
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
+        <li><a href="./visitor.html">Cards</a></li>
+        <li><a href="./visitor.html">Statisics</a></li>
+      </ul>
+    </div>
+
+    <h4 class="page-section">All Visitors:</h4>
+
+    <!-- new visitor btn -->
+    <button onclick="openNewVisitorPopover()" class="new-btn">
+      <span class="material-symbols-outlined"> add </span>
+    </button>
+
+    <!-- new visitor popover -->
+    <div class="overlay js-new-overlay">
+      <form class="form js-new-form">
+        <span>New Visitor</span>
+        <span
+          onclick="closeNewVisitorPopover()"
+          class="close material-symbols-outlined"
+        >
+          close
+        </span>
+
+        <div>
+          <label>Name</label>
+          <input type="text" name="name" required />
+        </div>
+
+        <div>
+          <label>Phone Numbers</label>
+          <input type="number" name="phone" required />
+        </div>
+
+        <button type="submit" class="add-btn">Add</button>
+      </form>
+    </div>
+
+    <div class="sort-search-container">
+      <!-- sort -->
+      <div class="sort-container">
+        <select class="js-sort-type">
+          <option value="id">ID</option>
+          <option value="name">Name</option>
+        </select>
+        <button class="sort-btn js-sort-btn">Sort</button>
+      </div>
+
+      <!-- search -->
+      <div class="search-container">
+        <input
+          class="search-bar js-search-bar"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="table-container">
+      <table class="table js-table"></table>
+    </div>
+
+    <!-- edit book popover -->
+    <div class="overlay js-edit-overlay">
+      <form class="form js-edit-form">
+        <span>Edit Visitor</span>
+        <span
+          onclick="closeEditVisitorPopover()"
+          class="close material-symbols-outlined"
+        >
+          close
+        </span>
+
+        <div class="js-name-container">
+          <label>Name</label>
+          <input type="text" name="name" required />
+        </div>
+
+        <div class="js-phone-container">
+          <label>Phone Numbers</label>
+          <input type="number" name="phone" required />
+        </div>
+
+        <button type="submit" class="save-btn">Save</button>
+      </form>
+    </div>
+
+    <script src="./scripts/storage.js"></script>
+    <script src="./scripts/visitor.js"></script>
+  </body>
+</html>

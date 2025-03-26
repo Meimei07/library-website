@@ -1,0 +1,121 @@
+/* header */
+.header {
+  color: #2a2f4a;
+}
+
+.header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: #c7d9dd;
+  height: 40px;
+  padding: 0 10px;
+}
+
+h1 {
+  font-size: 20px;
+  letter-spacing: 5px;
+}
+
+.header button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-navbar {
+  animation: fadeIn 0.5s;
+
+  &:popover-open {
+    background-color: #c7d9dd;
+    list-style-type: none;
+    padding: 8px 10px;
+    border: none;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 50%;
+    height: 100%;
+
+    position: absolute;
+    inset: unset;
+    top: 0;
+    right: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    width: 0;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+.header li:first-child {
+  display: flex;
+  justify-content: space-between;
+}
+
+.close {
+  color: gray;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    color: gainsboro;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: #2a2f4a;
+
+  &:hover {
+    font-weight: bold;
+  }
+}
+
+/* big screen navbar */
+.big-screen-navbar {
+  display: none;
+  align-items: center;
+  gap: 20px;
+
+  list-style-type: none;
+  padding: 0 15px;
+  background-color: #c7d9dd;
+}
+
+.big-screen-navbar a {
+  border-right: 2px solid #ddd;
+  padding: 10px 0;
+  padding-right: 20px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+@media (min-width: 450px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  .header > div {
+    background-color: transparent;
+
+    & button {
+      display: none;
+    }
+  }
+
+  .big-screen-navbar {
+    display: flex;
+    margin-bottom: 15px;
+  }
+}

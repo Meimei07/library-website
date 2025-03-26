@@ -1,0 +1,27 @@
+/* table */
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  text-align: center;
+  color: #2a2f4a;
+  background-color: #d5e5d5;
+}
+
+@media (min-width: 450px) {
+  .table {
+    margin-bottom: 15px;
+  }
+}
