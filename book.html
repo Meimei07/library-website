@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book</title>
-    <link rel="stylesheet" href="book.css" />
+    <link rel="stylesheet" href="./styles/book.css" />
 
     <link
       rel="stylesheet"
@@ -22,7 +22,7 @@
         </button>
       </div>
 
-      <ul popover id="sidebar">
+      <ul class="mobile-navbar" popover id="sidebar">
         <li>
           <span class="material-symbols-outlined"> dictionary </span
           ><span
@@ -37,9 +37,16 @@
         <li><a href="">Cards</a></li>
         <li><a href="">Statisics</a></li>
       </ul>
+
+      <ul class="big-screen-navbar">
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
+        <li><a href="./visitor.html">Cards</a></li>
+        <li><a href="./visitor.html">Statisics</a></li>
+      </ul>
     </div>
 
-    <h4 class="book-section">All Books:</h4>
+    <h4 class="page-section">All Books:</h4>
 
     <!-- new book popover -->
     <button onclick="openNewBookPopover()" class="new-book-btn">
@@ -167,6 +174,6 @@
       </form>
     </div>
 
-    <script src="book.js"></script>
+    <script src="./scripts/book.js"></script>
   </body>
 </html>

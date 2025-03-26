@@ -35,7 +35,7 @@ h1 {
   cursor: pointer;
 }
 
-.header ul {
+.mobile-navbar {
   animation: fadeIn 0.5s;
 
   &:popover-open {
@@ -85,10 +85,34 @@ h1 {
 a {
   text-decoration: none;
   color: #2a2f4a;
+
+  &:hover {
+    font-weight: bold;
+  }
 }
 
-.book-section {
-  /* background-color: red; */
+/* big screen navbar */
+.big-screen-navbar {
+  display: none;
+  align-items: center;
+  gap: 20px;
+
+  list-style-type: none;
+  padding: 0 15px;
+  background-color: #c7d9dd;
+}
+
+.big-screen-navbar a {
+  border-right: 2px solid #ddd;
+  padding: 10px 0;
+  padding-right: 20px;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.page-section {
   color: #2a2f4a;
   padding: 0 12px;
   padding-top: 5px;
@@ -170,8 +194,6 @@ th {
   background-color: #d5e5d5;
 }
 
-.edit-book-btn,
-.delete-book-btn,
 .sort-book-btn,
 .save-book-btn,
 .add-book-btn {
@@ -188,8 +210,20 @@ th {
   }
 }
 
-.edit-book-btn {
+.edit-delete-btn {
+  text-align: center;
+}
+
+.edit-delete-btn > button {
   margin-bottom: 1px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: gray;
+
+  &:hover {
+    color: red;
+  }
 }
 
 /* popover */
@@ -241,4 +275,58 @@ th {
   position: absolute;
   top: 2px;
   right: 5px;
+}
+
+@media (min-width: 450px) {
+  h1 {
+    font-size: 25px;
+  }
+
+  .header > div {
+    background-color: transparent;
+
+    & button {
+      display: none;
+    }
+  }
+
+  .big-screen-navbar {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  .page-section {
+    font-size: 17px;
+  }
+
+  .sort-search-container {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .sort-container {
+    width: 300px;
+    flex: 1;
+
+    & > select {
+      padding: 8px 5px;
+    }
+
+    & > button {
+      width: 50px;
+    }
+  }
+
+  .search-container {
+    flex: 1;
+    width: 270px;
+
+    & > input {
+      padding: 8px 5px;
+    }
+  }
+
+  .book-table {
+    margin-top: 15px;
+  }
 }

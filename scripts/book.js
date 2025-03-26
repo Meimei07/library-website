@@ -14,6 +14,8 @@ const sortBtn = document.querySelector(".js-sort-book-btn");
 const typeEl = document.querySelector(".js-sort-type");
 const newBookOverlay = document.querySelector(".js-new-book-overlay");
 const editBookOverlay = document.querySelector(".js-edit-book-overlay");
+const activePage = window.location.pathname;
+const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
 let bookId;
 let matchingBooks;
@@ -71,9 +73,13 @@ function renderBook(books) {
         <td>${book.publishYear}</td>
         <td>${book.pages}</td>
         <td>${book.copies}</td>
-        <td>
-          <button onclick="editBook(${book.id}); openEditBookPopover();" class="edit-book-btn">edit</button>
-          <button onclick="deleteBook(${book.id})" class="delete-book-btn js-delete-book-btn">delete</button>
+        <td class="edit-delete-btn">
+          <button onclick="editBook(${book.id}); openEditBookPopover();"><span class="material-symbols-outlined">
+edit_square
+</span></button>
+          <button onclick="deleteBook(${book.id})" class="js-delete-book-btn"><span class="material-symbols-outlined">
+delete_forever
+</span></button>
         </td>
       </tr>
     `;
@@ -87,7 +93,7 @@ function renderBook(books) {
         <th style="width: 10%">Publish year</th>
         <th style="width: 10%">Pages</th>
         <th style="width: 10%">Copies</th>
-        <th style="width: 10%">Actions</th>
+        <th style="width: 5%">Actions</th>
       </tr>${html}`;
 }
 
@@ -244,5 +250,12 @@ sortBtn.addEventListener("click", () => {
     search(keyword);
     sortBooks(matchingBooks);
     renderBook(matchingBooks);
+  }
+});
+
+// handle navbar link click
+navLinks.forEach((link) => {
+  if (link.href.includes(`${activePage}`)) {
+    link.classList.add("active");
   }
 });
