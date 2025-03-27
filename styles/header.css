@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
 
-  background-color: #c7d9dd;
+  background-color: #c6ac8f;
   height: 40px;
   padding: 0 10px;
 }
@@ -28,7 +28,7 @@ h1 {
   animation: fadeIn 0.5s;
 
   &:popover-open {
-    background-color: #c7d9dd;
+    background-color: #c6ac8f;
     list-style-type: none;
     padding: 8px 10px;
     border: none;
@@ -67,16 +67,18 @@ h1 {
   user-select: none;
 
   &:hover {
-    color: gainsboro;
+    color: rgb(237, 143, 143);
   }
 }
 
 a {
   text-decoration: none;
   color: #2a2f4a;
+  transition: all 0.3s;
 
   &:hover {
     font-weight: bold;
+    color: beige;
   }
 }
 
@@ -88,7 +90,7 @@ a {
 
   list-style-type: none;
   padding: 0 15px;
-  background-color: #c7d9dd;
+  background-color: #c6ac8f;
 }
 
 .big-screen-navbar a {

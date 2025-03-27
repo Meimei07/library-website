@@ -30,12 +30,16 @@ function renderVisitor(visitors) {
         <td>${visitor.name}</td>
         <td>${visitor.phone}</td>
         <td class="edit-delete-btn">
-          <button onclick="editVisitor(${visitor.id}); openEditVisitorPopover();"><span class="material-symbols-outlined">
-edit_square
-</span></button>
-          <button onclick="deleteVisitor(${visitor.id})"><span class="material-symbols-outlined">
-delete_forever
-</span></button>
+          <button onclick="editVisitor(${visitor.id}); openEditVisitorPopover();">
+            <span class="edit material-symbols-outlined">
+              edit_square
+            </span>
+          </button>
+          <button onclick="deleteVisitor(${visitor.id})">
+            <span class="delete material-symbols-outlined">
+              delete_forever
+            </span>
+          </button>
         </td>
       </tr>
     `;

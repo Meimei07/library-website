@@ -40,12 +40,16 @@ function renderBook(books) {
         <td>${book.pages}</td>
         <td>${book.copies}</td>
         <td class="edit-delete-btn">
-          <button onclick="editBook(${book.id}); openEditBookPopover();"><span class="material-symbols-outlined">
-edit_square
-</span></button>
-          <button onclick="deleteBook(${book.id})" class="js-delete-book-btn"><span class="material-symbols-outlined">
-delete_forever
-</span></button>
+          <button onclick="editBook(${book.id}); openEditBookPopover();">
+            <span class="edit material-symbols-outlined">
+              edit_square
+            </span>
+          </button>
+          <button onclick="deleteBook(${book.id})" class="js-delete-book-btn">
+            <span class="delete material-symbols-outlined">
+              delete_forever
+            </span>
+          </button>
         </td>
       </tr>
     `;
