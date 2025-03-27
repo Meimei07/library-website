@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Card</title>
+
+    <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/popover.css" />
+    <link rel="stylesheet" href="./styles/table.css" />
+    <link rel="stylesheet" href="./styles/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <div class="header">
+      <div>
+        <h1>LIBRARY</h1>
+
+        <button popovertarget="sidebar">
+          <span class="menu material-symbols-outlined"> menu </span>
+        </button>
+      </div>
+
+      <ul class="mobile-navbar" popover id="sidebar">
+        <li>
+          <span class="material-symbols-outlined"> dictionary </span
+          ><span
+            onclick="sidebar.hidePopover()"
+            class="close material-symbols-outlined"
+          >
+            close
+          </span>
+        </li>
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
+        <li><a href="./card.html">Cards</a></li>
+        <li><a href="">Statisics</a></li>
+      </ul>
+
+      <ul class="big-screen-navbar">
+        <li><a href="./book.html">Books</a></li>
+        <li><a href="./visitor.html">Visitors</a></li>
+        <li><a href="./card.html">Cards</a></li>
+        <li><a href="./visitor.html">Statisics</a></li>
+      </ul>
+    </div>
+
+    <h4 class="page-section">All Cards:</h4>
+
+    <!-- new card btn -->
+    <button onclick="openNewCardPopover()" class="new-btn">
+      <span class="material-symbols-outlined"> add </span>
+    </button>
+
+    <!-- new card popover -->
+    <div class="overlay js-new-overlay">
+      <form class="form js-new-form">
+        <span>New Card</span>
+        <span
+          onclick="closeNewCardPopover()"
+          class="close material-symbols-outlined"
+        >
+          close
+        </span>
+
+        <div class="wrapper">
+          <div>
+            <label>Visitor</label>
+            <select
+              class="js-visitor-options"
+              name="visitorId"
+              required
+            ></select>
+          </div>
+
+          <div>
+            <label>Book</label>
+            <select class="js-book-options" name="bookId" required></select>
+          </div>
+        </div>
+
+        <button type="submit" class="add-btn">Add</button>
+      </form>
+    </div>
+
+    <div class="sort-search-container">
+      <!-- sort -->
+      <div class="sort-container">
+        <select class="js-sort-type">
+          <option value="id">ID</option>
+          <option value="borrowDate">Borrow date</option>
+          <option value="returnDate">Return date</option>
+        </select>
+        <button class="sort-btn js-sort-btn">Sort</button>
+      </div>
+
+      <!-- search -->
+      <div class="search-container">
+        <input
+          class="search-bar js-search-bar"
+          type="search"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+
+    <!-- table -->
+    <div class="table-container">
+      <table class="table js-table"></table>
+    </div>
+
+    <script src="./scripts/storage.js"></script>
+    <script src="./scripts/card.js"></script>
+  </body>
+</html>
