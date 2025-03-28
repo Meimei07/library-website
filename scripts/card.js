@@ -189,9 +189,18 @@ newFormEl.addEventListener("submit", (event) => {
   // remove 1 copy from book
   const matchingBook = books.find((book) => book.id == card.bookId);
   matchingBook.copies -= 1;
-  console.log(matchingBook);
+
+  // increase book borrow count by 1
+  matchingBook.borrowCount += 1;
+
   saveToLocalStorage("books", books);
   renderBookOptions();
+
+  // increase visitor borrow count by 1
+  const matchingVisitor = visitors.find(
+    (visitor) => visitor.id === card.visitorId
+  );
+  matchingVisitor.borrowCount += 1;
 
   newFormEl.reset();
   closeNewCardPopover();

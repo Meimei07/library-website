@@ -191,6 +191,7 @@ newFormEl.addEventListener("submit", (event) => {
   book.copies = parseInt(book.copies);
 
   book.id = Math.floor(Math.random() * 10001);
+  book.borrowCount = 0;
 
   books.push(book);
   saveToLocalStorage("books", books);

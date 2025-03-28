@@ -165,6 +165,7 @@ newFormEl.addEventListener("submit", (event) => {
   }
 
   visitor.id = Math.floor(Math.random() * 10001);
+  visitor.borrowCount = 0;
 
   visitors.push(visitor);
   saveToLocalStorage("visitors", visitors);
