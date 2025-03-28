@@ -17,6 +17,7 @@ let sortType;
 
 // get data
 let visitors = getFromLocalStorage("visitors") || [];
+let cards = getFromLocalStorage("cards") || [];
 
 // render
 function renderVisitor(visitors) {
@@ -55,8 +56,41 @@ function renderVisitor(visitors) {
 
 // delete
 function deleteVisitor(id) {
-  let matchingIndex = visitors.findIndex((visitor) => visitor.id === id);
-  visitors.splice(matchingIndex, 1);
+  const matchingCards = cards.filter((card) => card.visitorId === id);
+  let allBooksReturned = true;
+
+  if (!matchingCards) {
+    // can delete
+    let matchingIndex = visitors.findIndex((visitor) => visitor.id === id);
+    visitors.splice(matchingIndex, 1);
+  } else {
+    // can delete only if visitor has return books
+    matchingCards.forEach((card) => {
+      if (card.isReturned === false) {
+        allBooksReturned = false;
+        return;
+      }
+    });
+
+    if (allBooksReturned === true) {
+      // can delete
+      let matchingIndex = visitors.findIndex((visitor) => visitor.id === id);
+      visitors.splice(matchingIndex, 1);
+    } else {
+      alert("This visitor can't be deleted just yet!");
+    }
+  }
+
+  // also delete from card
+  if (matchingCards && allBooksReturned) {
+    matchingCards.forEach((matchingCard) => {
+      let matchingIndex = cards.findIndex(
+        (card) => card.id === matchingCard.id
+      );
+      cards.splice(matchingIndex, 1);
+    });
+  }
+  saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("visitors", visitors);
   renderVisitor(visitors);

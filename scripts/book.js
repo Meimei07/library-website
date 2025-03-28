@@ -23,6 +23,7 @@ let sortType;
 
 // get data
 let books = getFromLocalStorage("books") || [];
+let cards = getFromLocalStorage("cards") || [];
 
 // render
 function renderBook(books) {
@@ -69,8 +70,41 @@ function renderBook(books) {
 
 // delete
 function deleteBook(id) {
-  let matchingIndex = books.findIndex((book) => book.id === id);
-  books.splice(matchingIndex, 1);
+  const matchingCards = cards.filter((card) => card.bookId === id);
+  let allBooksReturned = true;
+
+  if (!matchingCards) {
+    // can delete
+    let matchingIndex = books.findIndex((book) => book.id === id);
+    books.splice(matchingIndex, 1);
+  } else {
+    // can delete only if all books have been returned
+    matchingCards.forEach((card) => {
+      if (card.isReturned === false) {
+        allBooksReturned = false;
+        return;
+      }
+    });
+
+    if (allBooksReturned === true) {
+      // can delete
+      let matchingIndex = books.findIndex((book) => book.id === id);
+      books.splice(matchingIndex, 1);
+    } else {
+      alert("This book can't be deleted just yet!");
+    }
+  }
+
+  // also delete from card
+  if (matchingCards && allBooksReturned) {
+    matchingCards.forEach((matchingCard) => {
+      let matchingIndex = cards.findIndex(
+        (card) => card.id === matchingCard.id
+      );
+      cards.splice(matchingIndex, 1);
+    });
+  }
+  saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("books", books);
   renderBook(books);
