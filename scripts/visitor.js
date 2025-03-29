@@ -6,8 +6,6 @@ const editFormEl = document.querySelector(".js-edit-form");
 const searchEl = document.querySelector(".js-search-bar");
 const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
-const newVisitorOverlay = document.querySelector(".js-new-overlay");
-const editVisitorOverlay = document.querySelector(".js-edit-overlay");
 
 let visitorId;
 let matchingVisitors;
@@ -93,26 +91,6 @@ function sortVisitors(visitors) {
   }
 }
 
-// open new visitor popover
-function openNewVisitorPopover() {
-  newVisitorOverlay.style.display = "flex";
-}
-
-// close new visitor popover
-function closeNewVisitorPopover() {
-  newVisitorOverlay.style.display = "none";
-}
-
-// open edit visitor popover
-function openEditVisitorPopover() {
-  editVisitorOverlay.style.display = "flex";
-}
-
-// close edit visitor popover
-function closeEditVisitorPopover() {
-  editVisitorOverlay.style.display = "none";
-}
-
 renderVisitor(visitors, tableEl);
 
 // add new visitor
@@ -135,7 +113,7 @@ newFormEl.addEventListener("submit", (event) => {
   renderVisitor(visitors, tableEl);
 
   newFormEl.reset();
-  closeNewVisitorPopover();
+  newOverlay.style.display = "none";
 });
 
 // save edit
@@ -164,7 +142,7 @@ editFormEl.addEventListener("submit", (e) => {
   saveToLocalStorage("visitors", visitors);
   renderVisitor(visitors, tableEl);
 
-  closeEditVisitorPopover();
+  editOverlay.style.display = "none";
 });
 
 // show search results

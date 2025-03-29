@@ -52,16 +52,16 @@
     <h4 class="page-section">All Visitors:</h4>
 
     <!-- new visitor btn -->
-    <button onclick="openNewVisitorPopover()" class="new-btn">
+    <button onclick="newOverlay.style.display = 'flex'" class="new-btn">
       <span class="material-symbols-outlined"> add </span>
     </button>
 
     <!-- new visitor popover -->
-    <div class="overlay js-new-overlay">
+    <div id="newOverlay" class="overlay">
       <form class="form js-new-form">
         <span>New Visitor</span>
         <span
-          onclick="closeNewVisitorPopover()"
+          onclick="newOverlay.style.display = 'none'"
           class="close material-symbols-outlined"
         >
           close
@@ -107,11 +107,11 @@
     </div>
 
     <!-- edit book popover -->
-    <div class="overlay js-edit-overlay">
+    <div id="editOverlay" class="overlay">
       <form class="form js-edit-form">
         <span>Edit Visitor</span>
         <span
-          onclick="closeEditVisitorPopover()"
+          onclick="editOverlay.style.display = 'none'"
           class="close material-symbols-outlined"
         >
           close

@@ -53,16 +53,16 @@
     <h4 class="page-section">All Cards:</h4>
 
     <!-- new card btn -->
-    <button onclick="openNewCardPopover()" class="new-btn">
+    <button onclick="newOverlay.style.display = 'flex'" class="new-btn">
       <span class="material-symbols-outlined"> add </span>
     </button>
 
     <!-- new card popover -->
-    <div class="overlay js-new-overlay">
+    <div id="newOverlay" class="overlay">
       <form class="form js-new-form">
         <span>New Card</span>
         <span
-          onclick="closeNewCardPopover()"
+          onclick="newOverlay.style.display = 'none'"
           class="close material-symbols-outlined"
         >
           close

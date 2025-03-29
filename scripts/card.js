@@ -1,6 +1,5 @@
 const tabelEl = document.querySelector(".js-table");
 const newFormEl = document.querySelector(".js-new-form");
-const newCardOverlay = document.querySelector(".js-new-overlay");
 const visitorSelectEl = document.querySelector(".js-visitor-options");
 const bookSelectEl = document.querySelector(".js-book-options");
 const sortBtn = document.querySelector(".js-sort-btn");
@@ -37,16 +36,6 @@ function renderBookOptions() {
   });
 
   bookSelectEl.innerHTML = html;
-}
-
-// open new card popover
-function openNewCardPopover() {
-  newCardOverlay.style.display = "flex";
-}
-
-// close new card popover
-function closeNewCardPopover() {
-  newCardOverlay.style.display = "none";
 }
 
 function renderCards(cards) {
@@ -189,7 +178,7 @@ newFormEl.addEventListener("submit", (event) => {
   saveToLocalStorage("visitors", visitors);
 
   newFormEl.reset();
-  closeNewCardPopover();
+  newOverlay.style.display = "none";
 });
 
 // show sort results

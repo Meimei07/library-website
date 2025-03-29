@@ -21,7 +21,7 @@ function renderBook(books, tableEl) {
         <td>${book.pages}</td>
         <td>${book.copies}</td>
         <td class="edit-delete-btn js-edit-delete-btn">
-          <button onclick="editBook(${book.id}); openEditBookPopover();">
+          <button onclick="editBook(${book.id}); editOverlay.style.display = 'flex'">
             <span class="edit material-symbols-outlined">
               edit_square
             </span>
@@ -59,7 +59,7 @@ function renderVisitor(visitors, tableEl) {
         <td>${visitor.name}</td>
         <td>${visitor.phone}</td>
         <td class="edit-delete-btn js-edit-delete-btn">
-          <button onclick="editVisitor(${visitor.id}); openEditVisitorPopover();">
+          <button onclick="editVisitor(${visitor.id}); editOverlay.style.display = 'flex'">
             <span class="edit material-symbols-outlined">
               edit_square
             </span>

@@ -12,8 +12,6 @@ const editFormEl = document.querySelector(".js-edit-form");
 const searchEl = document.querySelector(".js-search-bar");
 const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
-const newBookOverlay = document.querySelector(".js-new-overlay");
-const editBookOverlay = document.querySelector(".js-edit-overlay");
 
 let bookId;
 let matchingBooks;
@@ -107,26 +105,6 @@ function sortBooks(books) {
   }
 }
 
-// open new book popover
-function openNewBookPopover() {
-  newBookOverlay.style.display = "flex";
-}
-
-// close new book popover
-function closeNewBookPopover() {
-  newBookOverlay.style.display = "none";
-}
-
-// open edit book popover
-function openEditBookPopover() {
-  editBookOverlay.style.display = "flex";
-}
-
-// close edit book popover
-function closeEditBookPopover() {
-  editBookOverlay.style.display = "none";
-}
-
 renderBook(books, tableEl);
 
 // add new book
@@ -153,7 +131,7 @@ newFormEl.addEventListener("submit", (event) => {
   renderBook(books, tableEl);
 
   newFormEl.reset();
-  closeNewBookPopover();
+  newOverlay.style.display = "none";
 });
 
 // save edit
@@ -187,7 +165,7 @@ editFormEl.addEventListener("submit", (e) => {
   saveToLocalStorage("books", books);
   renderBook(books, tableEl);
 
-  closeEditBookPopover();
+  editOverlay.style.display = "none";
 });
 
 // show search results
