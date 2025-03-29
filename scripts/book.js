@@ -6,12 +6,14 @@ const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 
 let bookId;
-let matchingBooks;
+let keyword;
 let sortType;
 
 // get data
 let books = getFromLocalStorage("books") || [];
 let cards = getFromLocalStorage("cards") || [];
+
+let matchingBooks = books;
 
 // delete
 function deleteBook(id) {
@@ -52,7 +54,14 @@ function deleteBook(id) {
   saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("books", books);
-  renderBook(books, tableEl);
+
+  matchingBooks = books;
+
+  // in case user search or search and sort, then delete
+  search(keyword);
+  sortBooks(matchingBooks);
+
+  renderBook(matchingBooks, tableEl);
 }
 
 // edit book
@@ -102,7 +111,7 @@ function sortBooks(books) {
   }
 }
 
-renderBook(books, tableEl);
+renderBook(matchingBooks, tableEl);
 
 // add new book
 newFormEl.addEventListener("submit", (event) => {
@@ -125,7 +134,9 @@ newFormEl.addEventListener("submit", (event) => {
 
   books.push(book);
   saveToLocalStorage("books", books);
-  renderBook(books, tableEl);
+
+  matchingBooks = books;
+  renderBook(matchingBooks, tableEl);
 
   newFormEl.reset();
   newOverlay.style.display = "none";
@@ -147,8 +158,6 @@ editFormEl.addEventListener("submit", (e) => {
   book.pages = parseInt(book.pages);
   book.copies = parseInt(book.copies);
 
-  // book.id = bookId;
-
   let matchingIndex = books.findIndex((book) => book.id === bookId);
   const existingBook = books[matchingIndex];
 
@@ -160,14 +169,21 @@ editFormEl.addEventListener("submit", (e) => {
 
   books[matchingIndex] = updateBook;
   saveToLocalStorage("books", books);
-  renderBook(books, tableEl);
+
+  matchingBooks = books;
+
+  // in case user search or sort and search, then edit
+  search(keyword);
+  sortBooks(matchingBooks);
+
+  renderBook(matchingBooks, tableEl);
 
   editOverlay.style.display = "none";
 });
 
 // show search results
 searchEl.addEventListener("keyup", () => {
-  let keyword = searchEl.value;
+  keyword = searchEl.value;
   console.log(keyword);
 
   search(keyword);
@@ -176,21 +192,10 @@ searchEl.addEventListener("keyup", () => {
 
 // show sort results
 sortBtn.addEventListener("click", () => {
-  let keyword = searchEl.value;
   sortType = typeEl.options[typeEl.selectedIndex].value;
 
-  if (keyword === "") {
-    // sort books
-
-    sortBooks(books);
-    renderBook(books, tableEl);
-  } else if (keyword !== "") {
-    // sort search results
-
-    search(keyword);
-    sortBooks(matchingBooks);
-    renderBook(matchingBooks, tableEl);
-  }
+  sortBooks(matchingBooks);
+  renderBook(matchingBooks, tableEl);
 });
 
 // handle navbar link click
