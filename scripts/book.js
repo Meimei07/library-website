@@ -1,13 +1,5 @@
 const tableEl = document.querySelector(".js-table");
 const newFormEl = document.querySelector(".js-new-form");
-const nameEl = document.querySelector(".js-name-container input");
-const authorEl = document.querySelector(".js-author-container input");
-const publisherEl = document.querySelector(".js-publisher-container input");
-const publishYearEl = document.querySelector(
-  ".js-publish-year-container input"
-);
-const pagesEl = document.querySelector(".js-pages-container input");
-const copiesEl = document.querySelector(".js-copies-container input");
 const editFormEl = document.querySelector(".js-edit-form");
 const searchEl = document.querySelector(".js-search-bar");
 const sortBtn = document.querySelector(".js-sort-btn");
@@ -69,12 +61,17 @@ function editBook(id) {
 
   let matchingBook = books.find((book) => book.id === id);
 
-  nameEl.value = matchingBook.name;
-  authorEl.value = matchingBook.author;
-  publisherEl.value = matchingBook.publisher;
-  publishYearEl.value = matchingBook.publishYear;
-  pagesEl.value = matchingBook.pages;
-  copiesEl.value = matchingBook.copies;
+  document.querySelector(".js-name-container input").value = matchingBook.name;
+  document.querySelector(".js-author-container input").value =
+    matchingBook.author;
+  document.querySelector(".js-publisher-container input").value =
+    matchingBook.publisher;
+  document.querySelector(".js-publish-year-container input").value =
+    matchingBook.publishYear;
+  document.querySelector(".js-pages-container input").value =
+    matchingBook.pages;
+  document.querySelector(".js-copies-container input").value =
+    matchingBook.copies;
 }
 
 // search

@@ -1,7 +1,5 @@
 const tableEl = document.querySelector(".js-table");
 const newFormEl = document.querySelector(".js-new-form");
-const nameEl = document.querySelector(".js-name-container input");
-const phoneEl = document.querySelector(".js-phone-container input");
 const editFormEl = document.querySelector(".js-edit-form");
 const searchEl = document.querySelector(".js-search-bar");
 const sortBtn = document.querySelector(".js-sort-btn");
@@ -63,8 +61,10 @@ function editVisitor(id) {
 
   let matchingVisitor = visitors.find((visitor) => visitor.id === id);
 
-  nameEl.value = matchingVisitor.name;
-  phoneEl.value = matchingVisitor.phone;
+  document.querySelector(".js-name-container input").value =
+    matchingVisitor.name;
+  document.querySelector(".js-phone-container input").value =
+    matchingVisitor.phone;
 }
 
 // search
