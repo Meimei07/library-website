@@ -6,31 +6,12 @@ const bookSelectEl = document.querySelector(".js-book-options");
 const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 const searchEl = document.querySelector(".js-search-bar");
-const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
 let sortType;
 let displayingCards;
 
+// get data
 const cards = getFromLocalStorage("cards") || [];
-
-// const cards = [
-//   {
-//     id: 1,
-//     visitorId: 5444,
-//     bookId: 2182,
-//     borrowDate: new Date(),
-//     returnDate: "",
-//   },
-//   {
-//     id: 2,
-//     visitorId: 5444,
-//     bookId: 7605,
-//     borrowDate: new Date(),
-//     returnDate: "",
-//   },
-// ];
-
 const visitors = getFromLocalStorage("visitors") || [];
 const books = getFromLocalStorage("books") || [];
 
@@ -164,6 +145,10 @@ function search(keyword) {
   });
 }
 
+renderVisitorOptions();
+renderBookOptions();
+renderCards(cards);
+
 // add new card
 newFormEl.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -236,12 +221,4 @@ searchEl.addEventListener("keyup", () => {
 });
 
 // handle navbar link click
-navLinks.forEach((link) => {
-  if (link.href.includes(`${activePage}`)) {
-    link.classList.add("active");
-  }
-});
-
-renderVisitorOptions();
-renderBookOptions();
-renderCards(cards);
+styleActivePage();

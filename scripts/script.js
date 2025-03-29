@@ -1,3 +1,11 @@
+function saveToLocalStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function getFromLocalStorage(key) {
+  return JSON.parse(localStorage.getItem(key));
+}
+
 function renderBook(books, tableEl) {
   let html = "";
   tableEl.innerHTML = "";
@@ -72,4 +80,15 @@ function renderVisitor(visitors, tableEl) {
         <th style="width: 15%">Phone Numbers</th>
         <th class="js-actions-header" style="width: 5%">Actions</th>
       </tr>${html}`;
+}
+
+function styleActivePage() {
+  const activePage = window.location.pathname;
+  const navLinks = document.querySelectorAll(".big-screen-navbar a");
+
+  navLinks.forEach((link) => {
+    if (link.href.includes(activePage)) {
+      link.classList.add("active");
+    }
+  });
 }

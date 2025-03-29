@@ -8,8 +8,6 @@ const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 const newVisitorOverlay = document.querySelector(".js-new-overlay");
 const editVisitorOverlay = document.querySelector(".js-edit-overlay");
-const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
 let visitorId;
 let matchingVisitors;
@@ -198,8 +196,4 @@ sortBtn.addEventListener("click", () => {
 });
 
 // handle navbar link click
-navLinks.forEach((link) => {
-  if (link.href.includes(`${activePage}`)) {
-    link.classList.add("active");
-  }
-});
+styleActivePage();

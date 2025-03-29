@@ -14,8 +14,6 @@ const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 const newBookOverlay = document.querySelector(".js-new-overlay");
 const editBookOverlay = document.querySelector(".js-edit-overlay");
-const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
 let bookId;
 let matchingBooks;
@@ -221,8 +219,4 @@ sortBtn.addEventListener("click", () => {
 });
 
 // handle navbar link click
-navLinks.forEach((link) => {
-  if (link.href.includes(`${activePage}`)) {
-    link.classList.add("active");
-  }
-});
+styleActivePage();

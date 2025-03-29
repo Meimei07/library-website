@@ -1,7 +1,5 @@
 const popularTable = document.querySelector(".js-popular-book-table");
 const bookSection = document.querySelector("#book");
-const activePage = window.location.pathname;
-const navLinks = document.querySelectorAll(".big-screen-navbar a");
 
 let books = getFromLocalStorage("books");
 let visitors = getFromLocalStorage("visitors");
@@ -21,11 +19,7 @@ function findPopular(array, render, text) {
   document.querySelector(".js-actions-header").style.display = "none";
 }
 
-findPopular(books, renderBook);
+findPopular(books, renderBook, "popular books");
 
 // handle navbar link click
-navLinks.forEach((link) => {
-  if (link.href.includes(`${activePage}`)) {
-    link.classList.add("active");
-  }
-});
+styleActivePage();
