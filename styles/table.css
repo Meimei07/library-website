@@ -2,6 +2,7 @@
 .table-container {
   overflow-x: auto;
   margin-top: 15px;
+  color: #333b68;
 }
 
 .table {
@@ -17,7 +18,7 @@ th {
 }
 
 th {
-  color: white;
+  color: beige;
   font-weight: normal;
   background-color: #c6ac8f;
 }
