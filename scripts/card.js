@@ -201,6 +201,7 @@ newFormEl.addEventListener("submit", (event) => {
     (visitor) => visitor.id === card.visitorId
   );
   matchingVisitor.borrowCount += 1;
+  saveToLocalStorage("visitors", visitors);
 
   newFormEl.reset();
   closeNewCardPopover();

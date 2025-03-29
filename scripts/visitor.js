@@ -19,41 +19,6 @@ let sortType;
 let visitors = getFromLocalStorage("visitors") || [];
 let cards = getFromLocalStorage("cards") || [];
 
-// render
-// function renderVisitor(visitors) {
-//   let html = "";
-//   tableEl.innerHTML = "";
-
-//   visitors.forEach((visitor) => {
-//     html += `
-//       <tr>
-//         <td>${visitor.id}</td>
-//         <td>${visitor.name}</td>
-//         <td>${visitor.phone}</td>
-//         <td class="edit-delete-btn">
-//           <button onclick="editVisitor(${visitor.id}); openEditVisitorPopover();">
-//             <span class="edit material-symbols-outlined">
-//               edit_square
-//             </span>
-//           </button>
-//           <button onclick="deleteVisitor(${visitor.id})">
-//             <span class="delete material-symbols-outlined">
-//               delete_forever
-//             </span>
-//           </button>
-//         </td>
-//       </tr>
-//     `;
-//   });
-
-//   tableEl.innerHTML = `<tr>
-//         <th style="width: 5%">ID</th>
-//         <th style="width: 15%">Name</th>
-//         <th style="width: 15%">Phone Numbers</th>
-//         <th style="width: 5%">Actions</th>
-//       </tr>${html}`;
-// }
-
 // delete
 function deleteVisitor(id) {
   const matchingCards = cards.filter((card) => card.visitorId === id);
@@ -93,7 +58,7 @@ function deleteVisitor(id) {
   saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors);
+  renderVisitor(visitors, tableEl);
 }
 
 // edit book
@@ -150,7 +115,7 @@ function closeEditVisitorPopover() {
   editVisitorOverlay.style.display = "none";
 }
 
-renderVisitor(visitors);
+renderVisitor(visitors, tableEl);
 
 // add new visitor
 newFormEl.addEventListener("submit", (event) => {
@@ -169,7 +134,7 @@ newFormEl.addEventListener("submit", (event) => {
 
   visitors.push(visitor);
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors);
+  renderVisitor(visitors, tableEl);
 
   newFormEl.reset();
   closeNewVisitorPopover();
@@ -187,12 +152,19 @@ editFormEl.addEventListener("submit", (e) => {
     return;
   }
 
-  visitor.id = visitorId;
+  // visitor.id = visitorId;
   let matchingIndex = visitors.findIndex((visitor) => visitor.id === visitorId);
+  const existingVisitor = visitors[matchingIndex];
 
-  visitors[matchingIndex] = visitor;
+  const updatedVisitor = {
+    ...existingVisitor,
+    ...visitor,
+    id: visitorId,
+  };
+
+  visitors[matchingIndex] = updatedVisitor;
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors);
+  renderVisitor(visitors, tableEl);
 
   closeEditVisitorPopover();
 });
@@ -203,7 +175,7 @@ searchEl.addEventListener("keyup", () => {
   console.log(keyword);
 
   search(keyword);
-  renderVisitor(matchingVisitors);
+  renderVisitor(matchingVisitors, tableEl);
 });
 
 // show sort results
@@ -215,13 +187,13 @@ sortBtn.addEventListener("click", () => {
     // sort books
 
     sortVisitors(visitors);
-    renderVisitor(visitors);
+    renderVisitor(visitors, tableEl);
   } else if (keyword !== "") {
     // sort search results
 
     search(keyword);
     sortVisitors(matchingVisitors);
-    renderVisitor(matchingVisitors);
+    renderVisitor(matchingVisitors, tableEl);
   }
 });
 

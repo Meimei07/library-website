@@ -25,49 +25,6 @@ let sortType;
 let books = getFromLocalStorage("books") || [];
 let cards = getFromLocalStorage("cards") || [];
 
-// render
-// function renderBook(books) {
-//   let html = "";
-//   tableEl.innerHTML = "";
-
-//   books.forEach((book) => {
-//     html += `
-//       <tr>
-//         <td>${book.id}</td>
-//         <td>${book.name}</td>
-//         <td>${book.author}</td>
-//         <td>${book.publisher}</td>
-//         <td>${book.publishYear}</td>
-//         <td>${book.pages}</td>
-//         <td>${book.copies}</td>
-//         <td class="edit-delete-btn">
-//           <button onclick="editBook(${book.id}); openEditBookPopover();">
-//             <span class="edit material-symbols-outlined">
-//               edit_square
-//             </span>
-//           </button>
-//           <button onclick="deleteBook(${book.id})" class="js-delete-book-btn">
-//             <span class="delete material-symbols-outlined">
-//               delete_forever
-//             </span>
-//           </button>
-//         </td>
-//       </tr>
-//     `;
-//   });
-
-//   tableEl.innerHTML = `<tr>
-//         <th style="width: 5%">ID</th>
-//         <th style="width: 15%">Book</th>
-//         <th style="width: 15%">Author</th>
-//         <th style="width: 15%">Publisher</th>
-//         <th style="width: 10%">Publish year</th>
-//         <th style="width: 10%">Pages</th>
-//         <th style="width: 10%">Copies</th>
-//         <th style="width: 5%">Actions</th>
-//       </tr>${html}`;
-// }
-
 // delete
 function deleteBook(id) {
   const matchingCards = cards.filter((card) => card.bookId === id);
@@ -107,7 +64,7 @@ function deleteBook(id) {
   saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("books", books);
-  renderBook(books);
+  renderBook(books, tableEl);
 }
 
 // edit book
@@ -172,7 +129,7 @@ function closeEditBookPopover() {
   editBookOverlay.style.display = "none";
 }
 
-renderBook(books);
+renderBook(books, tableEl);
 
 // add new book
 newFormEl.addEventListener("submit", (event) => {
@@ -195,7 +152,7 @@ newFormEl.addEventListener("submit", (event) => {
 
   books.push(book);
   saveToLocalStorage("books", books);
-  renderBook(books);
+  renderBook(books, tableEl);
 
   newFormEl.reset();
   closeNewBookPopover();
@@ -217,13 +174,20 @@ editFormEl.addEventListener("submit", (e) => {
   book.pages = parseInt(book.pages);
   book.copies = parseInt(book.copies);
 
-  book.id = bookId;
+  // book.id = bookId;
 
   let matchingIndex = books.findIndex((book) => book.id === bookId);
+  const existingBook = books[matchingIndex];
 
-  books[matchingIndex] = book;
+  const updateBook = {
+    ...existingBook,
+    ...book,
+    id: bookId,
+  };
+
+  books[matchingIndex] = updateBook;
   saveToLocalStorage("books", books);
-  renderBook(books);
+  renderBook(books, tableEl);
 
   closeEditBookPopover();
 });
@@ -234,7 +198,7 @@ searchEl.addEventListener("keyup", () => {
   console.log(keyword);
 
   search(keyword);
-  renderBook(matchingBooks);
+  renderBook(matchingBooks, tableEl);
 });
 
 // show sort results
@@ -246,13 +210,13 @@ sortBtn.addEventListener("click", () => {
     // sort books
 
     sortBooks(books);
-    renderBook(books);
+    renderBook(books, tableEl);
   } else if (keyword !== "") {
     // sort search results
 
     search(keyword);
     sortBooks(matchingBooks);
-    renderBook(matchingBooks);
+    renderBook(matchingBooks, tableEl);
   }
 });
 
