@@ -10,7 +10,68 @@ let sortType;
 let keyword = "";
 
 // get data
-let visitors = getFromLocalStorage("visitors") || [];
+let visitors = getFromLocalStorage("visitors") || [
+  {
+    id: 7532,
+    name: "John Smith",
+    phone: "555-123-4567",
+    borrowCount: 0,
+  },
+  {
+    id: 1894,
+    name: "Emma Johnson",
+    phone: "444 987 6543",
+    borrowCount: 0,
+  },
+  {
+    id: 6207,
+    name: "Liam Brown",
+    phone: "333-876-5432",
+    borrowCount: 0,
+  },
+  {
+    id: 4821,
+    name: "Olivia Wilson",
+    phone: "222 765 4321",
+    borrowCount: 0,
+  },
+  {
+    id: 9375,
+    name: "Noah Taylor",
+    phone: "111-654-3210",
+    borrowCount: 0,
+  },
+  {
+    id: 3148,
+    name: "Sophia Martinez",
+    phone: "666 543 2109",
+    borrowCount: 0,
+  },
+  {
+    id: 8702,
+    name: "William Anderson",
+    phone: "777-432-1098",
+    borrowCount: 0,
+  },
+  {
+    id: 5296,
+    name: "Isabella Thomas",
+    phone: "888 321 0987",
+    borrowCount: 0,
+  },
+  {
+    id: 6921,
+    name: "James Garcia",
+    phone: "999-210-9876",
+    borrowCount: 0,
+  },
+  {
+    id: 1453,
+    name: "Mia Harris",
+    phone: "123 456 7890",
+    borrowCount: 0,
+  },
+];
 let cards = getFromLocalStorage("cards") || [];
 
 let matchingVisitors = visitors;
