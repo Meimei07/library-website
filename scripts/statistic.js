@@ -3,6 +3,7 @@ const bookSection = document.querySelector("#book");
 
 // get data
 let books = getFromLocalStorage("books") || [];
+let visitors = getFromLocalStorage("visitors") || [];
 
 function findPopular(array, render, text) {
   array.sort((a, b) => b.borrowCount - a.borrowCount);

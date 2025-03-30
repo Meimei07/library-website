@@ -84,7 +84,7 @@ function renderVisitor(visitors, tableEl) {
 
 function styleActivePage() {
   const activePage = window.location.pathname;
-  const navLinks = document.querySelectorAll(".big-screen-navbar a");
+  const navLinks = document.querySelectorAll(".navbar a");
 
   navLinks.forEach((link) => {
     if (link.href.includes(activePage)) {

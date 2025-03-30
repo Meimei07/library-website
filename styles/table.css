@@ -8,6 +8,10 @@
 .table {
   border-collapse: collapse;
   width: 100%;
+
+  @media (min-width: 450px) {
+    margin-bottom: 15px;
+  }
 }
 
 td,
@@ -21,10 +25,4 @@ th {
   color: beige;
   font-weight: normal;
   background-color: #c6ac8f;
-}
-
-@media (min-width: 450px) {
-  .table {
-    margin-bottom: 15px;
-  }
 }

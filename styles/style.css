@@ -67,9 +67,7 @@ input {
   }
 }
 
-.sort-btn,
-.save-btn,
-.add-btn {
+.btn {
   border: none;
   border-radius: 6px;
   background-color: #c6ac8f;
