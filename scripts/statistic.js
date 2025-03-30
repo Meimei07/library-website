@@ -1,8 +1,8 @@
 const popularTable = document.querySelector(".js-popular-book-table");
 const bookSection = document.querySelector("#book");
 
-let books = getFromLocalStorage("books");
-let visitors = getFromLocalStorage("visitors");
+// get data
+let books = getFromLocalStorage("books") || [];
 
 function findPopular(array, render, text) {
   array.sort((a, b) => b.borrowCount - a.borrowCount);

@@ -7,12 +7,14 @@ const typeEl = document.querySelector(".js-sort-type");
 const searchEl = document.querySelector(".js-search-bar");
 
 let sortType;
-let displayingCards;
+let keyword = "";
 
 // get data
 const cards = getFromLocalStorage("cards") || [];
 const visitors = getFromLocalStorage("visitors") || [];
 const books = getFromLocalStorage("books") || [];
+
+let matchingCards = cards;
 
 function renderVisitorOptions() {
   let html = "";
@@ -94,13 +96,20 @@ function handleReturnBtnClick(id) {
   matchingCard.isReturned = true;
 
   saveToLocalStorage("cards", cards);
-  renderCards(cards);
+
+  matchingCards = cards;
+
+  search(keyword);
+  sortCards(matchingCards);
+
+  renderCards(matchingCards);
 
   // return 1 book back
   const matchingBook = books.find((book) => book.id == matchingCard.bookId);
   matchingBook.copies += 1;
   console.log(matchingBook);
   saveToLocalStorage("books", books);
+
   renderBookOptions();
 }
 
@@ -118,7 +127,7 @@ function sortCards(cards) {
 }
 
 function search(keyword) {
-  displayingCards = cards.filter((card) => {
+  matchingCards = cards.filter((card) => {
     let matchingVisitor = visitors.find(
       (visitor) => visitor.id === card.visitorId
     );
@@ -136,7 +145,7 @@ function search(keyword) {
 
 renderVisitorOptions();
 renderBookOptions();
-renderCards(cards);
+renderCards(matchingCards);
 
 // add new card
 newFormEl.addEventListener("submit", (event) => {
@@ -158,7 +167,9 @@ newFormEl.addEventListener("submit", (event) => {
 
   cards.push(card);
   saveToLocalStorage("cards", cards);
-  renderCards(cards);
+
+  matchingCards = cards;
+  renderCards(matchingCards);
 
   // remove 1 copy from book
   const matchingBook = books.find((book) => book.id == card.bookId);
@@ -183,30 +194,20 @@ newFormEl.addEventListener("submit", (event) => {
 
 // show sort results
 sortBtn.addEventListener("click", () => {
-  let keyword = searchEl.value;
+  keyword = searchEl.value;
   sortType = typeEl.options[typeEl.selectedIndex].value;
 
-  if (keyword === "") {
-    // sort cards
-
-    sortCards(cards);
-    renderCards(cards);
-  } else if (keyword !== "") {
-    // sort search results
-
-    search(keyword);
-    sortCards(displayingCards);
-    renderCards(displayingCards);
-  }
+  sortCards(matchingCards);
+  renderCards(matchingCards);
 });
 
 // show search results
 searchEl.addEventListener("keyup", () => {
-  let keyword = searchEl.value;
+  keyword = searchEl.value;
   console.log(keyword);
 
   search(keyword);
-  renderCards(displayingCards);
+  renderCards(matchingCards);
 });
 
 // handle navbar link click

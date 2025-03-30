@@ -6,12 +6,14 @@ const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 
 let visitorId;
-let matchingVisitors;
 let sortType;
+let keyword = "";
 
 // get data
 let visitors = getFromLocalStorage("visitors") || [];
 let cards = getFromLocalStorage("cards") || [];
+
+let matchingVisitors = visitors;
 
 // delete
 function deleteVisitor(id) {
@@ -52,14 +54,21 @@ function deleteVisitor(id) {
   saveToLocalStorage("cards", cards);
 
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors, tableEl);
+
+  matchingVisitors = visitors;
+
+  // in case user search or search and sort, then delete
+  search(keyword);
+  sortVisitors(matchingVisitors);
+
+  renderVisitor(matchingVisitors, tableEl);
 }
 
 // edit book
 function editVisitor(id) {
   visitorId = id;
 
-  let matchingVisitor = visitors.find((visitor) => visitor.id === id);
+  let matchingVisitor = matchingVisitors.find((visitor) => visitor.id === id);
 
   document.querySelector(".js-name-container input").value =
     matchingVisitor.name;
@@ -91,7 +100,7 @@ function sortVisitors(visitors) {
   }
 }
 
-renderVisitor(visitors, tableEl);
+renderVisitor(matchingVisitors, tableEl);
 
 // add new visitor
 newFormEl.addEventListener("submit", (event) => {
@@ -110,7 +119,9 @@ newFormEl.addEventListener("submit", (event) => {
 
   visitors.push(visitor);
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors, tableEl);
+
+  matchingVisitors = visitors;
+  renderVisitor(matchingVisitors, tableEl);
 
   newFormEl.reset();
   newOverlay.style.display = "none";
@@ -128,26 +139,29 @@ editFormEl.addEventListener("submit", (e) => {
     return;
   }
 
-  // visitor.id = visitorId;
   let matchingIndex = visitors.findIndex((visitor) => visitor.id === visitorId);
   const existingVisitor = visitors[matchingIndex];
 
-  const updatedVisitor = {
-    ...existingVisitor,
-    ...visitor,
-    id: visitorId,
-  };
+  visitor.id = visitorId;
+  visitor.borrowCount = existingVisitor.borrowCount;
 
-  visitors[matchingIndex] = updatedVisitor;
+  visitors[matchingIndex] = visitor;
   saveToLocalStorage("visitors", visitors);
-  renderVisitor(visitors, tableEl);
+
+  matchingVisitors = visitors;
+
+  // in case user search or search and sort, then edit
+  search(keyword);
+  sortVisitors(matchingVisitors);
+
+  renderVisitor(matchingVisitors, tableEl);
 
   editOverlay.style.display = "none";
 });
 
 // show search results
 searchEl.addEventListener("keyup", () => {
-  let keyword = searchEl.value;
+  keyword = searchEl.value;
   console.log(keyword);
 
   search(keyword);
@@ -156,21 +170,10 @@ searchEl.addEventListener("keyup", () => {
 
 // show sort results
 sortBtn.addEventListener("click", () => {
-  let keyword = searchEl.value;
   sortType = typeEl.options[typeEl.selectedIndex].value;
 
-  if (keyword === "") {
-    // sort books
-
-    sortVisitors(visitors);
-    renderVisitor(visitors, tableEl);
-  } else if (keyword !== "") {
-    // sort search results
-
-    search(keyword);
-    sortVisitors(matchingVisitors);
-    renderVisitor(matchingVisitors, tableEl);
-  }
+  sortVisitors(matchingVisitors);
+  renderVisitor(matchingVisitors, tableEl);
 });
 
 // handle navbar link click

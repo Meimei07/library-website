@@ -6,7 +6,7 @@ const sortBtn = document.querySelector(".js-sort-btn");
 const typeEl = document.querySelector(".js-sort-type");
 
 let bookId;
-let keyword;
+let keyword = "";
 let sortType;
 
 // get data
@@ -68,7 +68,7 @@ function deleteBook(id) {
 function editBook(id) {
   bookId = id;
 
-  let matchingBook = books.find((book) => book.id === id);
+  let matchingBook = matchingBooks.find((book) => book.id === id);
 
   document.querySelector(".js-name-container input").value = matchingBook.name;
   document.querySelector(".js-author-container input").value =
@@ -120,11 +120,6 @@ newFormEl.addEventListener("submit", (event) => {
   const formData = new FormData(newFormEl);
   const book = Object.fromEntries(formData.entries());
 
-  if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
-    alert("please enter number greater than 0 only.");
-    return;
-  }
-
   book.publishYear = parseInt(book.publishYear);
   book.pages = parseInt(book.pages);
   book.copies = parseInt(book.copies);
@@ -149,11 +144,6 @@ editFormEl.addEventListener("submit", (e) => {
   const formData = new FormData(editFormEl);
   const book = Object.fromEntries(formData.entries());
 
-  if (book.publishYear < 1 || book.pages < 1 || book.copies < 1) {
-    alert("please enter number greater than 0 only.");
-    return;
-  }
-
   book.publishYear = parseInt(book.publishYear);
   book.pages = parseInt(book.pages);
   book.copies = parseInt(book.copies);
@@ -161,13 +151,10 @@ editFormEl.addEventListener("submit", (e) => {
   let matchingIndex = books.findIndex((book) => book.id === bookId);
   const existingBook = books[matchingIndex];
 
-  const updateBook = {
-    ...existingBook,
-    ...book,
-    id: bookId,
-  };
+  book.id = bookId;
+  book.borrowCount = existingBook.borrowCount;
 
-  books[matchingIndex] = updateBook;
+  books[matchingIndex] = book;
   saveToLocalStorage("books", books);
 
   matchingBooks = books;
