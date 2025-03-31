@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/section.css" />
     <link rel="stylesheet" href="./styles/popover.css" />
     <link rel="stylesheet" href="./styles/table.css" />
 
@@ -50,7 +51,31 @@
       </ul>
     </div>
 
-    <h4 class="page-section">All Cards:</h4>
+    <!-- section -->
+    <div>
+      <h4 class="page-section">All Cards:</h4>
+
+      <div class="sort-search-container">
+        <!-- sort -->
+        <div class="sort-container">
+          <select class="js-sort-type">
+            <option value="id">ID</option>
+            <option value="borrowDate">Borrow date</option>
+            <option value="returnDate">Return date</option>
+          </select>
+          <button class="btn js-sort-btn">Sort</button>
+        </div>
+
+        <!-- search -->
+        <div class="search-container">
+          <input
+            class="search-bar js-search-bar"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- new card btn -->
     <button onclick="newOverlay.style.display = 'flex'" class="new-btn">
@@ -86,27 +111,6 @@
 
         <button type="submit" class="btn">Add</button>
       </form>
-    </div>
-
-    <div class="sort-search-container">
-      <!-- sort -->
-      <div class="sort-container">
-        <select class="js-sort-type">
-          <option value="id">ID</option>
-          <option value="borrowDate">Borrow date</option>
-          <option value="returnDate">Return date</option>
-        </select>
-        <button class="btn js-sort-btn">Sort</button>
-      </div>
-
-      <!-- search -->
-      <div class="search-container">
-        <input
-          class="search-bar js-search-bar"
-          type="search"
-          placeholder="Search"
-        />
-      </div>
     </div>
 
     <!-- table -->

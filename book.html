@@ -6,9 +6,9 @@
     <title>Book</title>
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/section.css" />
     <link rel="stylesheet" href="./styles/popover.css" />
     <link rel="stylesheet" href="./styles/table.css" />
-    <link rel="stylesheet" href="./styles/book.css" />
 
     <link
       rel="stylesheet"
@@ -50,7 +50,31 @@
       </ul>
     </div>
 
-    <h4 class="page-section">All Books:</h4>
+    <!-- section -->
+    <div>
+      <h4 class="page-section">All Books:</h4>
+
+      <div class="sort-search-container">
+        <!-- sort -->
+        <div class="sort-container">
+          <select class="js-sort-type">
+            <option value="name">Book's name</option>
+            <option value="author">Author's name</option>
+            <option value="copies">Number of Copies</option>
+          </select>
+          <button class="btn js-sort-btn">Sort</button>
+        </div>
+
+        <!-- search -->
+        <div class="search-container">
+          <input
+            class="search-bar js-search-bar"
+            type="search"
+            placeholder="Search"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- new book btn -->
     <button onclick="newOverlay.style.display = 'flex'" class="new-btn">
@@ -78,7 +102,7 @@
           <input type="text" name="author" required />
         </div>
 
-        <div>
+        <div class="publisher-year-container">
           <div>
             <label>Publisher</label>
             <input type="text" name="publisher" required />
@@ -90,7 +114,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="pages-copies-container">
           <div>
             <label>Pages</label>
             <input type="number" name="pages" min="1" required />
@@ -104,27 +128,6 @@
 
         <button type="submit" class="btn">Add</button>
       </form>
-    </div>
-
-    <div class="sort-search-container">
-      <!-- sort -->
-      <div class="sort-container">
-        <select class="js-sort-type">
-          <option value="name">Book's name</option>
-          <option value="author">Author's name</option>
-          <option value="copies">Number of Copies</option>
-        </select>
-        <button class="btn js-sort-btn">Sort</button>
-      </div>
-
-      <!-- search -->
-      <div class="search-container">
-        <input
-          class="search-bar js-search-bar"
-          type="search"
-          placeholder="Search"
-        />
-      </div>
     </div>
 
     <!-- table -->

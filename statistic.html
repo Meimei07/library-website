@@ -7,8 +7,8 @@
 
     <link rel="stylesheet" href="./styles/style.css" />
     <link rel="stylesheet" href="./styles/header.css" />
+    <link rel="stylesheet" href="./styles/section.css" />
     <link rel="stylesheet" href="./styles/table.css" />
-    <link rel="stylesheet" href="./styles/statistic.css" />
 
     <link
       rel="stylesheet"
@@ -50,27 +50,30 @@
       </ul>
     </div>
 
+    <!-- section -->
     <div>
-      <div class="options-container">
-        <label
-          onclick="findPopular(books, renderBook, 'popular books')"
-          class="book"
-        >
-          <input name="section" type="radio" checked />
-          Books
-        </label>
+      <div class="options-container-center">
+        <div class="options-container">
+          <label
+            onclick="findPopular(books, renderBook, 'popular books')"
+            class="book"
+          >
+            <input name="section" type="radio" checked />
+            Books
+          </label>
 
-        <label
-          onclick="findPopular(visitors, renderVisitor, 'active visitors')"
-          class="visitor"
-        >
-          <input name="section" type="radio" />
-          Visitors
-        </label>
+          <label
+            onclick="findPopular(visitors, renderVisitor, 'active visitors')"
+            class="visitor"
+          >
+            <input name="section" type="radio" />
+            Visitors
+          </label>
+        </div>
       </div>
-    </div>
 
-    <p class="text"></p>
+      <p class="text"></p>
+    </div>
 
     <!-- table -->
     <div class="table-container">

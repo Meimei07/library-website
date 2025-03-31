@@ -1,4 +1,3 @@
-/* popover */
 .overlay {
   display: none;
   align-items: center;
@@ -39,7 +38,7 @@
   width: 80%;
   margin: 0 auto;
 
-  & select {
+  select {
     width: 100%;
     padding: 7px 5px;
   }
@@ -61,4 +60,27 @@
   position: absolute;
   top: 2px;
   right: 5px;
+}
+
+.publisher-year-container,
+.pages-copies-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+@media (min-width: 450px) {
+  .publisher-year-container,
+  .pages-copies-container {
+    flex-direction: row;
+  }
+
+  .form input {
+    width: 275px;
+  }
+
+  .publisher-year-container input,
+  .pages-copies-container input {
+    width: 100%;
+  }
 }

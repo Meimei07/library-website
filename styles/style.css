@@ -5,69 +5,31 @@
   font-family: sans-serif;
 }
 
+h1 {
+  font-size: 20px;
+  letter-spacing: 5px;
+
+  @media (min-width: 450px) {
+    font-size: 25px;
+  }
+}
+
 input {
   padding: 4px;
 }
 
-.page-section {
+a {
+  text-decoration: none;
   color: #2a2f4a;
-  padding: 0 12px;
-}
-
-/* new btn */
-.new-btn {
-  background-color: #c6ac8f;
-  border: 2px double #2a2f4a;
-  border-radius: 10px;
-  padding: 3px 7px;
-  cursor: pointer;
-  transition: all 0.4s;
-
-  position: fixed;
-  bottom: 20px;
-  right: 15px;
-
-  & > span {
-    color: #2a2f4a;
-    font-size: 30px;
-  }
+  transition: all 0.3s;
 
   &:hover {
-    background-color: #d9c1a6;
-    transform: scale(1.2);
+    font-weight: bold;
+    color: beige;
   }
 }
 
-.sort-search-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  padding: 10px;
-}
-
-/* sort */
-.sort-container {
-  display: flex;
-  gap: 10px;
-
-  & select {
-    flex: 1;
-    max-width: 200px;
-  }
-}
-
-/* search */
-.search-container {
-  max-width: 245px;
-
-  & input {
-    padding: 3px 5px;
-    width: 100%;
-  }
-}
-
-.btn {
+button {
   border: none;
   border-radius: 6px;
   background-color: #c6ac8f;
@@ -78,69 +40,5 @@ input {
 
   &:hover {
     background-color: #d9c1a6;
-  }
-}
-
-.edit-delete-btn,
-.return-date-container {
-  button {
-    margin-bottom: 1px;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    color: #d9cbbc;
-
-    .edit:hover {
-      transition: color 0.7s;
-      color: rgb(123, 163, 215);
-    }
-
-    .delete:hover {
-      transition: color 0.7s;
-      color: rgb(218, 101, 101);
-    }
-
-    .return:hover {
-      transition: color 0.7s;
-      color: rgb(124, 228, 152);
-    }
-  }
-}
-
-.active {
-  font-weight: bold;
-  color: beige;
-}
-
-@media (min-width: 450px) {
-  .page-section {
-    font-size: 17px;
-  }
-
-  .sort-search-container {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .sort-container {
-    width: 300px;
-    flex: 1;
-
-    & > select {
-      padding: 8px 5px;
-    }
-
-    & > button {
-      width: 50px;
-    }
-  }
-
-  .search-container {
-    flex: 1;
-    width: 270px;
-
-    & > input {
-      padding: 8px 5px;
-    }
   }
 }
