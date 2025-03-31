@@ -74,6 +74,8 @@ let visitors = getFromLocalStorage("visitors") || [
 ];
 let cards = getFromLocalStorage("cards") || [];
 
+saveToLocalStorage("visitors", visitors);
+
 let matchingVisitors = visitors;
 
 // delete

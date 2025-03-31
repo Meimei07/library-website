@@ -214,6 +214,8 @@ let books = getFromLocalStorage("books") || [
 ];
 let cards = getFromLocalStorage("cards") || [];
 
+saveToLocalStorage("books", books);
+
 let matchingBooks = books;
 
 // delete

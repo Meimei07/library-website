@@ -4,8 +4,13 @@ const bookSection = document.querySelector("#book");
 // get data
 let books = getFromLocalStorage("books") || [];
 let visitors = getFromLocalStorage("visitors") || [];
+let cards = getFromLocalStorage("cards") || [];
 
 function findPopular(array, render, text) {
+  if (cards.length < 5) {
+    return;
+  }
+
   array.sort((a, b) => b.borrowCount - a.borrowCount);
   const popularArray = array.filter((item, index) => index <= 4);
 
