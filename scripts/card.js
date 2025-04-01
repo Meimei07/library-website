@@ -43,7 +43,7 @@ function renderBookOptions() {
 function renderCards(cards) {
   let html = "";
 
-  cards.forEach((card) => {
+  cards.forEach((card, index) => {
     const matchingVisitor = visitors.find((visitor) => {
       return visitor.id === card.visitorId;
     });
@@ -62,7 +62,7 @@ function renderCards(cards) {
 
     html += `
       <tr>
-        <td>${card.id}</td>
+        <td>${index + 1}</td>
         <td>${matchingVisitor.name}</td>
         <td>${matchingBook.name}</td>
         <td>${borrowDate}</td>

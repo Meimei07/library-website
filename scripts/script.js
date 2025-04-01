@@ -10,10 +10,10 @@ function renderBook(books, tableEl) {
   let html = "";
   tableEl.innerHTML = "";
 
-  books.forEach((book) => {
+  books.forEach((book, index) => {
     html += `
       <tr>
-        <td>${book.id}</td>
+        <td>${index + 1}</td>
         <td>${book.name}</td>
         <td>${book.author}</td>
         <td>${book.publisher}</td>
@@ -21,7 +21,9 @@ function renderBook(books, tableEl) {
         <td>${book.pages}</td>
         <td>${book.copies}</td>
         <td class="edit-delete-btn js-edit-delete-btn">
-          <button onclick="editBook(${book.id}); editOverlay.style.display = 'flex'">
+          <button onclick="editBook(${
+            book.id
+          }); editOverlay.style.display = 'flex'">
             <span class="edit material-symbols-outlined">
               edit_square
             </span>
@@ -52,14 +54,16 @@ function renderVisitor(visitors, tableEl) {
   let html = "";
   tableEl.innerHTML = "";
 
-  visitors.forEach((visitor) => {
+  visitors.forEach((visitor, index) => {
     html += `
       <tr>
-        <td>${visitor.id}</td>
+        <td>${index + 1}</td>
         <td>${visitor.name}</td>
         <td>${visitor.phone}</td>
         <td class="edit-delete-btn js-edit-delete-btn">
-          <button onclick="editVisitor(${visitor.id}); editOverlay.style.display = 'flex'">
+          <button onclick="editVisitor(${
+            visitor.id
+          }); editOverlay.style.display = 'flex'">
             <span class="edit material-symbols-outlined">
               edit_square
             </span>
