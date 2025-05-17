@@ -4,15 +4,25 @@ A lightweight library management web application, allows librarian to keep track
 
 ## Features
 
-- **Book management**: Add, edit, delete, sort, and search through the library's book collection
+- Book management: Add, edit, delete, sort, and search through the library's book collection
 
-- **Visitor management**: Keep track of visitors with their information and allows add, edit, delete, sort, and search for visitor
+- Visitor management: Keep track of visitors with their information and allows add, edit, delete, sort, and search for visitor
 
-- **Card system**: Track borrowed books and returns with automated date
+- Card system: Track borrowed books and returns with automated date
 
-- **Statistic**: View the most popular books and active visitors
+- Statistic: View the most popular books and active visitors
 
-- **Data**: All data is stored in browser's local storage
+- Data: All data is stored in browser's local storage
+
+## Technologies used
+
+- HTML5
+
+- CSS3
+
+- Vanilla Javascript
+
+- Local Storage
 
 ## Website link
 
