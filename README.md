@@ -33,6 +33,7 @@ https://library-website-omega.vercel.app/
 Book page interface showing book's control and detail
 
 ![book page](assets/book-page.png)
+
 ![add-book](assets/add-book.png)
 
 Card page interface displaying borrowed book records and control
